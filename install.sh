@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+VERSION="0.0"
+
 set -e
 
 echo "Installing S-NAXS..."
@@ -13,8 +15,6 @@ else
     cp bin/S-NAXS.sh "$INSTALL_DIR/S-NAXS"
     chmod +x "$INSTALL_DIR/S-NAXS"
 fi
-
-VERSION=$(cat VERSION)
 
 echo ""
 echo "S-NAXS version ${VERSION} installed."
