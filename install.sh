@@ -14,5 +14,7 @@ else
     chmod +x "$INSTALL_DIR/S-NAXS"
 fi
 
+VERSION=$(cat VERSION)
+
 echo ""
-echo "Installation complete."
+echo "S-NAXS version ${VERSION} installed."
