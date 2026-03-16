@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VERSION_FILE="${SCRIPT_DIR}/../VERSION"
-
-if [[ -f "$VERSION_FILE" ]]; then
-    VERSION=$(cat "$VERSION_FILE")
-else
-    VERSION="unknown"
-fi
+VERSION="0.0"
 
 MAX_ASSEMBLY=99
 WORKDIR_NAME="S-NAXS-Temp"
