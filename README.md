@@ -1,2 +1,2 @@
-# C-NAXS
-C-NAXS: Curation of Nucleic Acid X-ray Structures
+# S-NAXS
+S-NAXS: Standardizer of Nucleic Acid X-ray Structures
