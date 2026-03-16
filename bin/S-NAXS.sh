@@ -48,7 +48,10 @@ Modes:
 Options:
   -h, --help
      Show this help message and exit.
-
+     
+  -v, --version
+     Show the program version and exit.
+     
   -d
      In the case of a double-stranded structure, a structure is obtained in which the loop has been removed.
 
