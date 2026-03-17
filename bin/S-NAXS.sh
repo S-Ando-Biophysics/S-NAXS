@@ -153,13 +153,22 @@ normalize_nonalpha_chain_ids_in_pdb() {
     {
       if ($0 ~ /^(ATOM  |HETATM)/) {
         c = substr($0, 22, 1)
+        alt = substr($0, 17, 1)
+
+        # Remove altloc by replacing column 17 with a blank
+        if (alt != " ") {
+          $0 = substr($0, 1, 16) " " substr($0, 18)
+        }
+
+        # Reassign non-alphabetic chain IDs
+        c = substr($0, 22, 1)
         if (c in mapping) {
           $0 = substr($0, 1, 21) mapping[c] substr($0, 23)
         }
       }
       print
     }
-  ' "$pdb" "$pdb" > "$tmp" || die "Failed while normalizing chain IDs in: $pdb"
+  ' "$pdb" "$pdb" > "$tmp" || die "Failed while normalizing chain IDs and altlocs in: $pdb"
 
   mv "$tmp" "$pdb"
 }
