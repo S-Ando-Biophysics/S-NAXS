@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-VERSION="0.0"
+VERSION="0.1"
 
 MAX_ASSEMBLY=99
 WORKDIR_NAME="S-NAXS-Temp"
@@ -31,6 +31,8 @@ Usage:
   S-NAXS -d -i=<input.cif>
   S-NAXS -h
   S-NAXS --help
+  S-NAXS -v
+  S-NAXS --version
 
 Modes:
   1) PDB ID mode
@@ -412,12 +414,13 @@ process_one_chain() {
 
   [[ -f "$aligned_pdb" ]] || die "The output PDB file was not created: $aligned_pdb"
 
-  printf '%s\n' "$aligned_pdb"
+  printf '%s\t%s\n' "$aligned_pdb" "$chain_type"
 }
 
 run_d_mode() {
   local standardized_pdb="$1"
   local outdir="$2"
+  local d_std_type="$3"
   local prefix="${standardized_pdb%.pdb}"
 
   [[ -f "$standardized_pdb" ]] || die "The standardized PDB file was not found for duplex post-processing: $standardized_pdb"
@@ -444,7 +447,7 @@ run_d_mode() {
   }
   ' "${prefix}.par" > "${prefix}-Fixed.par"
 
-  x3dna_utils cp_std RNA >&2
+  x3dna_utils cp_std "$d_std_type" >&2
   rebuild -atomic "${prefix}-Fixed.par" "${prefix}-Rebuild.pdb" >&2
 
   rm -f Atomic*.pdb ref_frames.dat
@@ -482,7 +485,8 @@ run_chain_workflow_from_pdb() {
   log "Detected chains: ${chains[*]}"
 
   local aligned_files=()
-  local i ch chain_pdb aligned new_chain_id
+  local chain_types=()
+  local i ch chain_pdb aligned new_chain_id result chain_type
   local chain_count="${#chains[@]}"
 
   if [[ "$chain_count" -eq 2 ]]; then
@@ -504,15 +508,20 @@ run_chain_workflow_from_pdb() {
       new_chain_id="$(index_to_chain_id "$i")"
     fi
 
-    aligned="$(process_one_chain "$chain_pdb" "$new_chain_id" "$chain_count" "$duplex_form")"
+    result="$(process_one_chain "$chain_pdb" "$new_chain_id" "$chain_count" "$duplex_form")"
 
-    if [[ "$aligned" == "__USE_ORIGINAL_NA_PDB__" ]]; then
-      cp "$na_pdb" "$outdir/"
+    if [[ "$result" == "__USE_ORIGINAL_NA_PDB__" ]]; then
+      cp "$na_pdb" "$standardized"
+      cp "$standardized" "$outdir/"
       log "Duplex form classification was undecidable for a DNA chain. Rebuild was skipped, and the final output is: $outdir/$na_pdb"
       return
     fi
 
+    aligned="${result%%$'\t'*}"
+    chain_type="${result#*$'\t'}"
+
     aligned_files+=("$aligned")
+    chain_types+=("$chain_type")
   done
 
   if [[ ${#aligned_files[@]} -eq 1 ]]; then
@@ -526,7 +535,19 @@ run_chain_workflow_from_pdb() {
 
   if [[ "$D_MODE" == true ]]; then
     if [[ "$chain_count" -eq 2 ]]; then
-      run_d_mode "$standardized" "$outdir"
+      local d_std_type=""
+
+      if [[ "${chain_types[0]}" == "DNA" && "${chain_types[1]}" == "DNA" ]]; then
+        d_std_type="ADNA"
+      elif [[ "${chain_types[0]}" == "RNA" && "${chain_types[1]}" == "RNA" ]]; then
+        d_std_type="RNA"
+      else
+        log "Option -d was specified, but duplex post-processing was skipped because the two chains are mixed types: ${chain_types[0]} / ${chain_types[1]}"
+      fi
+
+      if [[ -n "$d_std_type" ]]; then
+        run_d_mode "$standardized" "$outdir" "$d_std_type"
+      fi
     else
       log "Option -d was specified, but duplex post-processing was skipped because ${chain_count} chains were detected."
     fi
