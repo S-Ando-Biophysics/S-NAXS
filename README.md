@@ -1,5 +1,5 @@
 # S-NAXS
-S-NAXS = **S**tandardizer of **N**ucleic **A**cid **X**-ray **S**tructures
+S-NAXS = <ins>**S**</ins>tandardizer of <ins>**N**</ins>ucleic <ins>**A**</ins>cid <ins>**X**</ins>-ray <ins>**S**</ins>tructures
 
 ## About S-NAXS
 X-ray crystallographers encounter the phase problem when determining the three-dimensional structures of biological macromolecules. The phase problem arises because X-ray diffraction experiments measure only the intensities of diffracted X-rays, whereas the phase information required to reconstruct an electron density map is not directly observed. Without phase information, the electron density map, which reveals the positions of atoms in the crystal, cannot be calculated from the diffraction data.
