@@ -643,25 +643,21 @@ main() {
     download_all_assemblies "$PDB_ID"
 
     local asm=1
-    while true; do
-      local target_cif="${PDB_ID}-${asm}.cif"
-      
-      if [[ ! -f "$target_cif" ]]; then
-        log "No more assembly files found (${target_cif}). Finishing loop."
-        break
-      fi
-
+    while [[ -f "${PDB_ID}-${asm}.cif" ]]; do
       log "Attempting to process assembly ${asm}..."
 
       (
         set -e
         process_downloaded_assembly "$PDB_ID" "$asm" "$start_dir"
       ) || {
-
-        echo "[WARNING] Assembly ${asm} failed, but skipping to next." >&2
+        echo "[WARNING] Assembly ${asm} failed, skipping to next." >&2
       }
 
       ((asm++))
+
+      if [[ ! -f "${PDB_ID}-${asm}.cif" ]]; then
+        break
+      fi
     done
   else
     case "${INPUT_FILE##*.}" in
