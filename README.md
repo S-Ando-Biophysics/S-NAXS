@@ -44,3 +44,14 @@ After registering on the official website (forum) and receiving approval, you wi
     echo 'export X3DNA=/usr/local/x3dna-v2.4' >> ~/.bashrc
     echo 'export PATH="$X3DNA/bin:$PATH"' >> ~/.bashrc
     source ~/.bashrc
+
+#### Original citation-ware of 3DNA (https://x3dna.org/highlights/3dna-c-source-code-is-available)
+At least one of the 3DNA papers must be cited, including the following two primary ones:
+
+   1. Lu, X. J., & Olson, W. K. (2003). "3DNA: a software package for the analysis, rebuilding and visualization of three‐dimensional nucleic acid structures." Nucleic Acids Research, 31(17), 5108-5121.
+
+   2. Lu, X. J., & Olson, W. K. (2008). "3DNA: a versatile, integrated software system for the analysis, rebuilding and visualization of three-dimensional nucleic-acid structures." Nature Protocols, 3(7), 1213-1227.
+
+THE 3DNA SOFTWARE IS PROVIDED "AS IS", WITHOUT EXPRESSED OR IMPLIED WARRANTY OF ANY KIND.
+
+Any 3DNA-related questions, comments, and suggestions are welcome and should be directed to the open 3DNA Forum (http://forum.x3dna.org/).
