@@ -1,18 +1,18 @@
-# S-NAXS
-S-NAXS = <ins>**S**</ins>tandardizer of <ins>**N**</ins>ucleic <ins>**A**</ins>cid <ins>**X**</ins>-ray <ins>**S**</ins>tructures
+# P-NATS
+P-NAXS = <ins>**P**</ins>urifier of <ins>**N**</ins>ucleic <ins>**A**</ins>cid <ins>**T**</ins>hree dimensional <ins>**S**</ins>tructures
 
 ## About S-NAXS
 X-ray crystallographers encounter the phase problem when determining the three-dimensional structures of biological macromolecules. The phase problem arises because X-ray diffraction experiments measure only the intensities of diffracted X-rays, whereas the phase information required to reconstruct an electron density map is not directly observed. Without phase information, the electron density map, which reveals the positions of atoms in the crystal, cannot be calculated from the diffraction data.
 
 One of the most widely used methods for solving the phase problem is molecular replacement. In this approach, a previously determined structure that is expected to be similar to the target molecule is identified in the Protein Data Bank, a public repository of experimentally determined three-dimensional structures of biological macromolecules. The known structure is used as a search model to determine the orientation and position of the molecule in the crystal and to provide initial phase estimates for the diffraction data of the unknown structure. In essence, molecular replacement exploits structural similarity to obtain phase information.
 
-Before performing molecular replacement, it is often desirable to prepare a refined search model derived from the known structure. For example, ligands and crystallographic water molecules may be removed, and irregular features in the structure may be corrected in order to obtain a simplified and well-behaved model. **S-NAXS** is a tool designed specifically for nucleic acid structures that automatically performs these preprocessing steps.
+Before performing molecular replacement, it is often desirable to prepare a refined search model derived from the known structure. For example, ligands and crystallographic water molecules may be removed, and irregular features in the structure may be corrected in order to obtain a simplified and well-behaved model. **P-NATS** is a tool designed specifically for nucleic acid structures that automatically performs these preprocessing steps.
 
 ## How to install
 
     cd ~
-    git clone https://github.com/S-Ando-Biophysics/S-NAXS
-    cd S-NAXS
+    git clone https://github.com/S-Ando-Biophysics/P-NATS
+    cd P-NATS
     bash install.sh
 
 ## Preparation
@@ -22,7 +22,6 @@ Please install and set up the following external software in advance.
 | :----- | :----- |
 | Ubuntu | https://apps.microsoft.com/search?query=Ubuntu |
 | 3DNA | http://forum.x3dna.org/site-announcements/download-instructions/ |
-| Phenix | https://phenix-online.org/download |
 
 ### Ubuntu
 This is required only for Windows. It is necessary to turn on "Windows Subsystem for Linux (WSL)" and "Virtual Machine Platform" in the Windows settings to be able to use shell scripts. Furthermore, run `sudo apt update` and `sudo apt upgrade` on Ubuntu.
@@ -45,15 +44,3 @@ After registering on the official website (forum) and receiving approval, you wi
     echo 'export PATH="$X3DNA/bin:$PATH"' >> ~/.bashrc
     source ~/.bashrc
 
-### Phenix
-Please download the command-line installer from the official website. Then please run the following commands in order. The following steps are for Windows (WSL, Ubuntu). The procedure for macOS and Linux is similar.
-
-    # Please change the directory name and Phenix version as appropriate.
-    # Assume that "Phenix-2.0-5936-Linux-x86_64.sh" has been downloaded to "C:\Users\name\Downloads".
-    sudo su
-    cd /usr/local
-    mv /mnt/c/Users/name/Downloads/Phenix-2.0-5936-Linux-x86_64.sh .
-    bash Phenix-2.0-5936-Linux-x86_64.sh -b -p /usr/local/phenix-2.0-5936
-    exit
-    echo "source /usr/local/phenix-2.0-5936/phenix_env.sh" >> ~/.bashrc
-    source ~/.bashrc
