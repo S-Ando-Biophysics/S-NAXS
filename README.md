@@ -16,7 +16,7 @@ One of the most widely used methods for solving the phase problem is molecular r
 
 Before performing molecular replacement, it is often desirable to prepare a refined search model derived from the known structure. For example, ligands and crystallographic water molecules may be removed, and irregular features in the structure may be corrected in order to obtain a simplified and well-behaved model. **P-NATS** is a tool designed specifically for nucleic acid structures that automatically performs these preprocessing steps.
 
-## Notes
+## Dependencies
 P-NATS uses the software "3DNA" and the Python library "GEMMI".
 
 ||3DNA|GEMMI|
@@ -24,23 +24,3 @@ P-NATS uses the software "3DNA" and the Python library "GEMMI".
 |Homepage|https://x3dna.org/|https://github.com/project-gemmi/gemmi|
 |Citation|https://doi.org/10.1038/nprot.2008.104|https://doi.org/10.21105/joss.04200|
 |License|CC-BY-NC-4.0 & Original citation-ware|MPL-2.0|
-
-
-### 3DNA
-After registering on the official website (forum) and receiving approval, you will be able to download the installer. For details, please refer to the instructions on the official website. Once you have downloaded the installer, run the following commands in order. The following steps are for Windows (WSL, Ubuntu). The procedure for macOS and Linux is similar.
-
-    # Please change the directory name and 3DNA version as appropriate.
-    # Assume that "x3dna-v2.4-linux-64bit.tar.gz" has been downloaded to "C:\Users\name\Downloads".
-    sudo apt update
-    sudo apt install ruby
-    sudo su
-    cd /usr/local
-    mv /mnt/c/Users/name/Downloads/x3dna-v2.4-linux-64bit.tar.gz .
-    tar pzxvf x3dna-v2.4-linux-64bit.tar.gz
-    cd x3dna-v2.4/bin
-    ./x3dna_setup
-    exit
-    echo 'export X3DNA=/usr/local/x3dna-v2.4' >> ~/.bashrc
-    echo 'export PATH="$X3DNA/bin:$PATH"' >> ~/.bashrc
-    source ~/.bashrc
-
