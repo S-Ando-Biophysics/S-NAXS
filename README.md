@@ -23,7 +23,7 @@ P-NATS uses the software "3DNA" and the Python library "GEMMI".
 |:---|:---|:---|
 |Homepage|https://x3dna.org/|https://github.com/project-gemmi/gemmi|
 |Citation|https://doi.org/10.1038/nprot.2008.104|https://doi.org/10.21105/joss.04200|
-|License|CC-BY-NC-4.0 & Original citation-ware|MPL-2.0|
+|License|Original citation-ware|MPL-2.0|
 
 ### 3DNA
 If you do not have **3DNA**, please install it beforehand by following the instructions below.
@@ -46,6 +46,8 @@ After registering on the official website (forum) and receiving approval, you wi
     source ~/.bashrc
 
 #### Original citation-ware of 3DNA (https://x3dna.org/highlights/3dna-c-source-code-is-available)
+3DNA is a suite of software programs for the analysis, rebuilding and visualization of 3-Dimensional Nucleic Acid structures. Permission to use, copy, modify, and distribute this suite for any purpose, with or without fee, is hereby granted, and subject to the following conditions:
+
 At least one of the 3DNA papers must be cited, including the following two primary ones:
 
    1. Lu, X. J., & Olson, W. K. (2003). "3DNA: a software package for the analysis, rebuilding and visualization of three‐dimensional nucleic acid structures." Nucleic Acids Research, 31(17), 5108-5121.
